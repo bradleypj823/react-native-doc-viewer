@@ -1,12 +1,67 @@
-
 {
-  "name": "react-native-doc-viewer",
-  "version": "2.4.6",
-  "description": "React Native Native Module Bridge Quicklock Document Viewer for IOS + Android supports pdf, png, jpg, xls, ppt, doc, docx, pptx, xlx + Video Player mp4 supported ",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "_args": [
+    [
+      {
+        "raw": "react-native-doc-viewer",
+        "scope": null,
+        "escapedName": "react-native-doc-viewer",
+        "name": "react-native-doc-viewer",
+        "rawSpec": "",
+        "spec": "latest",
+        "type": "tag"
+      },
+      "/Users/lusantos/GettyProjects/ReactNative/Contributor"
+    ]
+  ],
+  "_from": "react-native-doc-viewer@latest",
+  "_id": "react-native-doc-viewer@2.4.4",
+  "_inCache": true,
+  "_location": "/react-native-doc-viewer",
+  "_nodeVersion": "7.10.0",
+  "_npmOperationalInternal": {
+    "host": "s3://npm-registry-packages",
+    "tmp": "tmp/react-native-doc-viewer-2.4.4.tgz_1496661469817_0.7830397691577673"
   },
+  "_npmUser": {
+    "name": "philpike",
+    "email": "philipp.hecht@icloud.com"
+  },
+  "_npmVersion": "4.2.0",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "react-native-doc-viewer",
+    "scope": null,
+    "escapedName": "react-native-doc-viewer",
+    "name": "react-native-doc-viewer",
+    "rawSpec": "",
+    "spec": "latest",
+    "type": "tag"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/react-native-doc-viewer/-/react-native-doc-viewer-2.4.4.tgz",
+  "_shasum": "d6d5cf6c2d857f73eeff52ec32579098fd6df093",
+  "_shrinkwrap": null,
+  "_spec": "react-native-doc-viewer",
+  "_where": "/Users/lusantos/GettyProjects/ReactNative/Contributor",
+  "author": {
+    "name": "Philipp Hecht"
+  },
+  "bugs": {
+    "url": "https://github.com/philipphecht/react-native-doc-viewer/issues"
+  },
+  "dependencies": {},
+  "description": "React Native Native Module Bridge Quicklock Document Viewer for IOS + Android supports pdf, png, jpg, xls, ppt, doc, docx, pptx, xlx + Video Player mp4 supported ",
+  "devDependencies": {},
+  "directories": {},
+  "dist": {
+    "shasum": "d6d5cf6c2d857f73eeff52ec32579098fd6df093",
+    "tarball": "https://registry.npmjs.org/react-native-doc-viewer/-/react-native-doc-viewer-2.4.4.tgz"
+  },
+  "gitHead": "43f8f7a48bf24699d7ef0d2fa725be44fc54ad3b",
+  "homepage": "https://github.com/philipphecht/react-native-doc-viewer/blob/master/README.md",
   "keywords": [
     "react-native",
     "react",
@@ -18,16 +73,27 @@
     "Video Player",
     "Doc Viewer"
   ],
-  "author": "Philipp Hecht",
   "license": "MIT",
+  "main": "index.js",
+  "maintainers": [
+    {
+      "name": "philpike",
+      "email": "info@hecht-consulting.ch"
+    }
+  ],
+  "name": "react-native-doc-viewer",
+  "optionalDependencies": {},
   "peerDependencies": {
     "react": "16.0.0-alpha.6",
-		"react-native": "0.44.0"
+    "react-native": "0.44.0"
   },
+  "readme": "ERROR: No README data found!",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/philipphecht/react-native-doc-viewer.git"
   },
-    "readme": "https://github.com/philipphecht/react-native-doc-viewer/blob/master/README.md",
-  "homepage": "https://github.com/philipphecht/react-native-doc-viewer/blob/master/README.md"
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "version": "2.4.4"
 }

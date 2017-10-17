@@ -10,8 +10,6 @@ A React Native bridge module: Document Viewer for files (pdf, png, jpg, xls, doc
 Changelog:
 
 ```
-2.4.6  -  Android FileProvider Fix for react-native 0.45. thanks to @iremlopsum
-
 2.4.1  -  Update to react-native 0.44.0
 
 2.3.2   - Video Player mp4 IOS

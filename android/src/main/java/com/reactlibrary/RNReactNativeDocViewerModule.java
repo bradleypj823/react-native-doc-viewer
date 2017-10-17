@@ -31,7 +31,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import android.support.v4.content.FileProvider;
 
 import android.content.ActivityNotFoundException;
 import android.content.Context;
@@ -59,7 +58,7 @@ public class RNReactNativeDocViewerModule extends ReactContextBaseJavaModule {
   public String getName() {
     return "RNReactNativeDocViewer";
   }
-
+    
   @ReactMethod
   public void openDoc(ReadableArray args, Callback callback) {
       final ReadableMap arg_object = args.getMap(0);
@@ -77,27 +76,7 @@ public class RNReactNativeDocViewerModule extends ReactContextBaseJavaModule {
             callback.invoke(e.getMessage());
        }
   }
-
-
-  @ReactMethod
-  public void openDocb64(ReadableArray args, Callback callback) {
-      final ReadableMap arg_object = args.getMap(0);
-      try {
-        if (arg_object.getString("base64") != null && arg_object.getString("fileName") != null && arg_object.getString("fileType") != null) {
-            // parameter parsing
-            final String base64 = arg_object.getString("base64");
-            final String fileName =arg_object.getString("fileName");
-            final String fileType =arg_object.getString("fileType");
-            // Begin the Download Task
-            //new FileDownloaderAsyncTask(callback, url, fileName).execute();
-        }else{
-            callback.invoke(false);
-        }
-       } catch (Exception e) {
-            callback.invoke(e.getMessage());
-       }
-  }
-
+    
     // used for all downloaded files, so we can find and delete them again.
     private final static String FILE_TYPE_PREFIX = "PP_";
     /**
@@ -132,11 +111,8 @@ public class RNReactNativeDocViewerModule extends ReactContextBaseJavaModule {
                 extension = "pdf";
                 System.out.println("extension (default): " + extension);
             }
-
-            Context context = getReactApplicationContext().getBaseContext();
-            File outputDir = context.getCacheDir();
             File f = File.createTempFile(FILE_TYPE_PREFIX, "." + extension,
-                    outputDir);
+                    null);
             // make sure the receiving app can read this file
             f.setReadable(true, false);
             System.out.println(f.getPath());
@@ -150,11 +126,6 @@ public class RNReactNativeDocViewerModule extends ReactContextBaseJavaModule {
             }
             reader.close();
             outStream.close();
-            if (f.exists()) {
-                System.out.println("File exists");
-            } else {
-                System.out.println("File doesn't exist");
-            }
             return f;
 
         } catch (FileNotFoundException e) {
@@ -167,7 +138,7 @@ public class RNReactNativeDocViewerModule extends ReactContextBaseJavaModule {
             return null;
         }
     }
-     /**
+/**
      * Returns the MIME Type of the file by looking at file name extension in
      * the URL.
      *
@@ -177,7 +148,7 @@ public class RNReactNativeDocViewerModule extends ReactContextBaseJavaModule {
     private static String getMimeType(String url) {
         String mimeType = null;
 
-        String extension = MimeTypeMap.getFileExtensionFromUrl(Uri.encode(url));
+        String extension = MimeTypeMap.getFileExtensionFromUrl(url);
         if (extension != null) {
             MimeTypeMap mime = MimeTypeMap.getSingleton();
             mimeType = mime.getMimeTypeFromExtension(extension);
@@ -192,12 +163,12 @@ public class RNReactNativeDocViewerModule extends ReactContextBaseJavaModule {
 
         return mimeType;
     }
-
+    
   private class FileDownloaderAsyncTask extends AsyncTask<Void, Void, File> {
         private final Callback callback;
         private final String url;
         private final String fileName;
-
+       
         public FileDownloaderAsyncTask(Callback callback,
                 String url, String fileName) {
             super();
@@ -223,41 +194,28 @@ public class RNReactNativeDocViewerModule extends ReactContextBaseJavaModule {
                 return;
             }
 
-            Context context = getCurrentActivity();
-
+            Context context = getReactApplicationContext().getBaseContext();
             // mime type of file data
             String mimeType = getMimeType(url);
-            if (mimeType == null || context == null) {
+            if (mimeType == null) {
                 return;
             }
             try {
-                Uri contentUri = FileProvider.getUriForFile(context, "com.reactlibrary.provider", result);
-                System.out.println("ContentUri");
-                System.out.println(contentUri);
-
                 Intent intent = new Intent(Intent.ACTION_VIEW);
-                intent.setDataAndType(contentUri, mimeType);
+                intent.setDataAndType(Uri.fromFile(result), mimeType);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-
-                if (intent.resolveActivity(context.getPackageManager()) != null) {
-                    context.startActivity(intent);
-                    // Thread-safe.
-                    callback.invoke(null, fileName);
-                } else {
-                    activityNotFoundMessage("Activity not found to handle: " + contentUri.toString() + " (" + mimeType + ")");
-                }
+                context.startActivity(intent);
+          
+                // Thread-safe.
+                callback.invoke(fileName);
             } catch (ActivityNotFoundException e) {
-                activityNotFoundMessage(e.getMessage());
+                System.out.println("ERROR");
+                System.out.println(e.getMessage());
+                callback.invoke(e.getMessage());
+                //e.printStackTrace();
             }
 
         }
 
-        private void activityNotFoundMessage(String message) {
-            System.out.println("ERROR");
-            System.out.println(message);
-            callback.invoke(message);
-            //e.printStackTrace();
-        }
     }
 }
